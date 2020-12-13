@@ -5,24 +5,22 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
-/** CSVReader
+/** keplerDataReader
   * 
   * 
   */
 object datareader extends App {
-    val file = io.Source.fromFile("people.csv") 
-    var m = Map[String, Int]()
-    for (line <- file.getLines) {
-      var state = line.split(",")(2)
-      if (m.contains(state)) {
-        m(state) += 1
-      } else {
-        m(state) = 1
-      }
-    }
-    m.foreach(println)
+    println(" Planet,   Radius")
+    val bufferedSource = io.Source.fromFile("cumulative_kepler2020.csv")
 
     val future = Future {
-      m.foreach(println)
-    } 
+      for (line <- bufferedSource.getLines) {
+        val cols = line.split(",").map(_.trim)
+        println(s"|${cols(3)}|${cols(16)}|}")
+      }
+    }
+
+  sleep(5000)
+
+  def sleep(time: Long): Unit = Thread.sleep(time)
 }
