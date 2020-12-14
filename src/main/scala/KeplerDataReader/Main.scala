@@ -1,17 +1,15 @@
-package datareader
+package KeplerDataReader
 
-import scala.collection.mutable.{ArrayBuffer, Map}
 import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.util.{Failure, Success}
 
 /** KeplerDataReader
-  * 
-  * 
+  *
+  *
   */
-object datareader extends App {
+object Main extends App {
     val bufferedSource = io.Source.fromFile("cumulative_kepler2020.csv")
-    val lines = ArrayBuffer[String]()
+    val dp = new DataProcessor()
+    val planets = dp.getPlanets(bufferedSource)
 
     println(" Planet,   Radius")
     val future = Future {
