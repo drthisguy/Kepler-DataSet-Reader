@@ -23,7 +23,7 @@ object KeplerDR extends App {
     System.exit(0)
   }
 
-  val colNumbers = new mutable.ArrayBuffer[Int]
+  val colNumbers = new mutable.ArrayBuffer[Int](args.length)
   val columns = args.filter(_.startsWith("--"))
   columns.foreach {
       case "--yr" => colNumbers.addOne(6)
@@ -37,11 +37,13 @@ object KeplerDR extends App {
       case _ => println("not an argument.")
   }
   println(colNumbers)
+  val table = dp.buildNewCSVTable(planets, colNumbers)
+
 //  val future = Future {
-//    planets.foreach(row => {
-//      val cols = row.split(",").map(_.trim)
-//      println(s"${cols(2)} | ${cols(14)}")
-//    })
+    table.foreach(row => {
+      val cols = row.split(",").map(_.trim)
+      println(s"${cols.foreach(col => print(s"| $col |"))}")
+    })
 //  }
 
   sleep(5000)

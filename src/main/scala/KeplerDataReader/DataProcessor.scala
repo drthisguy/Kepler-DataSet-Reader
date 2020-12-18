@@ -17,7 +17,7 @@ case class DataProcessor() {
 
   def buildNewCSVTable(rows: Set[String], columnNums: ArrayBuffer[Int]): Set[String] = {
     val table = Set[String]()
-    val it = Iterator(columnNums)
+//    val it = Iterator(columnNums)
     for (row <- rows) {
       val cols = row.split(",").map(_.trim())
       val sb = new StringBuilder()
@@ -27,14 +27,12 @@ case class DataProcessor() {
       sb.addAll(cols(1))
       sb.addOne(',')
 
-      columnNums.foreach(num =>{
-        sb.addAll(cols(num))
-        while(it.hasNext) {
-          sb.addOne(',')
-          it.next()
-        }
-      })
-      table.add(sb.toString())
+      columnNums.foreach(elem => {
+        sb.addAll(cols(elem))
+        sb.addOne(',')
+        })
+      println(sb)
+      table.add(sb.toString().substring(0, sb.length - 2))
     }
     table
   }
