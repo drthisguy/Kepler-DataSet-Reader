@@ -1,5 +1,6 @@
 package KeplerDataReader
 
+import scala.collection.mutable
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -7,7 +8,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
  *
  *
  */
-object Main extends App {
+object KeplerDR extends App {
   val terminal = new Terminal
   terminal.welcomeMessage()
 
@@ -22,18 +23,20 @@ object Main extends App {
     System.exit(0)
   }
 
+  val colNumbers = new mutable.ArrayBuffer[Int]
   val columns = args.filter(_.startsWith("--"))
   columns.foreach {
-      case "--yr" => println("year discovered")
-      case "--op" => "one"
-      case "--r" => "two"
-      case "--m" => "two"
-      case "--t" => println("EQ Temp")
-      case "--d" => "two"
-      case "--sm" => "two"
-      case "--sr" => "two"
+      case "--yr" => colNumbers.addOne(6)
+      case "--op" => colNumbers.addOne(11)
+      case "--r" => colNumbers.addOne(13)
+      case "--m" => colNumbers.addOne(15)
+      case "--t" => colNumbers.addOne(20)
+      case "--d" => colNumbers.addOne(33)
+      case "--sm" => colNumbers.addOne(26)
+      case "--sr" => colNumbers.addOne(25)
       case _ => println("not an argument.")
   }
+  println(colNumbers)
 //  val future = Future {
 //    planets.foreach(row => {
 //      val cols = row.split(",").map(_.trim)
