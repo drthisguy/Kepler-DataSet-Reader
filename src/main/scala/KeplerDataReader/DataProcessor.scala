@@ -1,17 +1,17 @@
 package KeplerDataReader
+
 import scala.io.BufferedSource
 import scala.collection.mutable.{Set}
 
 case class DataProcessor() {
 
-  def getPlanets(data: BufferedSource): Set[String] = {
-    val confirmedPlanets = Set[String]()
+  def getAllPlanets(data: BufferedSource): Set[String] = {
+    val planets = Set[String]()
 
-    //sort out false positive and unconfirmed planets
-    for (line <- data.getLines) {
-      if (line.split(",")(4) == "CONFIRMED")
-        confirmedPlanets.add(line)
+    //filter out the header, false positive and unconfirmed planets.
+    for (line <- data.getLines.drop(47)) {
+        planets.add(line)
     }
-    confirmedPlanets
+    planets
   }
 }
