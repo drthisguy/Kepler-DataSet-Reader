@@ -166,4 +166,7 @@ project/**/metals.sbt
 !.vscode/extensions.json
 *.code-workspace
 
+### custom ###
+keplerSet.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/scala,sbt,macos,intellij,vscode,metals

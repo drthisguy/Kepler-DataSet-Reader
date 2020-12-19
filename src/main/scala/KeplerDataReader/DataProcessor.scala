@@ -1,7 +1,6 @@
 package KeplerDataReader
 
-import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, Set, StringBuilder}
+import scala.collection.mutable.{ArrayBuffer, StringBuilder}
 import scala.io.BufferedSource
 
 case class DataProcessor() {
