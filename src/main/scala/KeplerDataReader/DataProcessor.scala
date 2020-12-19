@@ -1,23 +1,25 @@
 package KeplerDataReader
 
-import scala.io.BufferedSource
+import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, Set, StringBuilder}
+import scala.io.BufferedSource
 
 case class DataProcessor() {
 
-  def getAllPlanets(data: BufferedSource): Set[String] = {
-    val planets = Set[String]()
+  def getAllPlanets(data: BufferedSource): ArrayBuffer[String] = {
+    val planets = ArrayBuffer[String]()
+    var count = 0
 
     //drop header, add rows
-    for (line <- data.getLines.drop(47)) {
-        planets.add(line)
+    for (line <- data.getLines.drop(46)) {
+        planets+= line
+        count = count+1
     }
     planets
   }
 
-  def buildNewCSVTable(rows: Set[String], columnNums: ArrayBuffer[Int]): Set[String] = {
-    val table = Set[String]()
-//    val it = Iterator(columnNums)
+  def buildNewCSVTable(rows: ArrayBuffer[String], columnNums: ArrayBuffer[Int]): ArrayBuffer[String] = {
+    val table = ArrayBuffer[String]()
     for (row <- rows) {
       val cols = row.split(",").map(_.trim())
       val sb = new StringBuilder()
@@ -31,8 +33,7 @@ case class DataProcessor() {
         sb.addAll(cols(elem))
         sb.addOne(',')
         })
-      println(sb)
-      table.add(sb.toString().substring(0, sb.length - 2))
+      table.append(sb.toString.substring(0, sb.length() - 1))
     }
     table
   }

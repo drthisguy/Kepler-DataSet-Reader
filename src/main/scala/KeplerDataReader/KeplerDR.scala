@@ -1,5 +1,7 @@
 package KeplerDataReader
 
+import java.io.{BufferedWriter, File, FileWriter}
+
 import scala.collection.mutable
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -31,7 +33,7 @@ object KeplerDR extends App {
       case "--r" => colNumbers.addOne(13)
       case "--m" => colNumbers.addOne(15)
       case "--t" => colNumbers.addOne(20)
-      case "--d" => colNumbers.addOne(33)
+      case "--d" => colNumbers.addOne(35)
       case "--sm" => colNumbers.addOne(26)
       case "--sr" => colNumbers.addOne(25)
       case _ => println("not an argument.")
@@ -39,11 +41,19 @@ object KeplerDR extends App {
   println(colNumbers)
   val table = dp.buildNewCSVTable(planets, colNumbers)
 
+  val file = new File("keplerSet.csv")
+  val bw = new BufferedWriter(new FileWriter(file))
+  for (row <- table) {
+    bw.write(row)
+    bw.newLine()
+  }
+  bw.close()
+
 //  val future = Future {
-    table.foreach(row => {
-      val cols = row.split(",").map(_.trim)
-      println(s"${cols.foreach(col => print(s"| $col |"))}")
-    })
+//    table.foreach(row => {
+//      val cols = row.split(",").map(_.trim)
+//      println(s"${cols.foreach(col => print(s"| $col |"))}")
+//    })
 //  }
 
   sleep(5000)
