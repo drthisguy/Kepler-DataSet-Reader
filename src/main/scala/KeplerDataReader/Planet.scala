@@ -1,8 +1,14 @@
 package KeplerDataReader
 
-case class Planet() {}
+import org.bson.types.ObjectId
+
+
+class Planet {
+  var name = Option[String] = None
+  var hostStar = Option[String] = None
+}
 
 object Planet {
-  def apply(name: String, count: Int): Planet =
-    Planet(name, count)
+  def apply(name: String, hostStar: String): Planet =
+    Planet(name, hostStar)
 }

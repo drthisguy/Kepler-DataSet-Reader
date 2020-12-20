@@ -2,6 +2,8 @@ package KeplerDataReader
 
 import java.io.{BufferedWriter, File, FileWriter}
 
+import org.mongodb.scala.MongoClient
+
 import scala.collection.mutable
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -49,6 +51,10 @@ object KeplerDR extends App {
   }
   bw.close()
 
+  val planetsDAO = new PlanetDAO(MongoClient())
+  planetsDAO.createNewCollection(table)
+  val data = planetsDAO.getAll()
+  println(data)
 //  val future = Future {
 //    table.foreach(row => {
 //      val cols = row.split(",").map(_.trim)

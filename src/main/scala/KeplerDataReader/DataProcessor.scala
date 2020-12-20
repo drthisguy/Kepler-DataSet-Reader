@@ -1,5 +1,6 @@
 package KeplerDataReader
 
+import scala.collection.JavaConverters._
 import scala.collection.mutable.{ArrayBuffer, StringBuilder}
 import scala.io.BufferedSource
 
@@ -17,7 +18,7 @@ case class DataProcessor() {
     planets
   }
 
-  def buildNewCSVTable(rows: ArrayBuffer[String], columnNums: ArrayBuffer[Int]): ArrayBuffer[String] = {
+  def buildNewCSVTable(rows: ArrayBuffer[String], columnNums: ArrayBuffer[Int]): List[String] = {
     val table = ArrayBuffer[String]()
     for (row <- rows) {
       val cols = row.split(",").map(_.trim())
@@ -31,9 +32,9 @@ case class DataProcessor() {
       columnNums.foreach(elem => {
         sb.addAll(cols(elem))
         sb.addOne(',')
-        })
+      })
       table.append(sb.toString.substring(0, sb.length() - 1))
-    }
-    table
+    }.asJava
+    table.toList
   }
 }
