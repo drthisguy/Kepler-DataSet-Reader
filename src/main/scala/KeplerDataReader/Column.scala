@@ -1,21 +1,46 @@
 package KeplerDataReader
 
 trait Column {
-  val value: Option[Double] = None
+  val name: String
+  val value: Any
 }
 
-class DiscoverYear(value: Double) extends Column
+class PlanetName(override val value: String) extends Column {
+  override val name: String = "yearDiscovered"
+}
 
-class OrbitalPeriod(value: Double) extends Column
+class HostStar(override val value: String) extends Column {
+  override val name: String = "yearDiscovered"
+}
 
-class Radius(value: Double) extends Column
+class DiscoverYear(override val value: Int) extends Column {
+  override val name: String = "yearDiscovered"
+}
 
-class Mass(value: Double) extends Column
+class OrbitalPeriod(override val value: Double) extends Column {
+  override val name: String = "orbitalPeriod"
+}
 
-class Temperature(value: Double) extends Column
+class Radius(override val value: Double) extends Column {
+  override val name: String = "radius"
+}
 
-class StellarMass(value: Double) extends Column
+class Mass(override val value: Double) extends Column {
+  override val name: String = "mass"
+}
 
-class StellarRadius(value: Double) extends Column
+class Temperature(override val value: Double) extends Column {
+  override val name: String = "temperature"
+}
 
-class Distance(value: Double) extends Column
+class StellarMass(override val value: Double) extends Column {
+  override val name: String = "stellarMass"
+}
+
+class StellarRadius(override val value: Double) extends Column {
+  override val name: String = "stellarRadius"
+}
+
+class Distance(override val value: Double) extends Column {
+  override val name: String = "distance"
+}

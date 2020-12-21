@@ -53,8 +53,8 @@ object KeplerDR extends App {
 
   val planetsDAO = new PlanetDAO(MongoClient())
   planetsDAO.createNewCollection(table)
-  val data = planetsDAO.getAll()
-  println(data)
+//  val data = planetsDAO.getAll()
+//  println(data)
 //  val future = Future {
 //    table.foreach(row => {
 //      val cols = row.split(",").map(_.trim)
